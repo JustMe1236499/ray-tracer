@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main (String[] args){
 
-        final int IMG_WIDTH = 400;
-        final int IMG_HEIGHT = 300;
+        Camera camera = new Camera(new Vector3(0,0,0), new Vector3(0,0,-1));
+
+        final int IMG_WIDTH = Camera.width;
+        final int IMG_HEIGHT = Camera.height;
         final int MAX_VAL = 255;
         try (PrintWriter write = new PrintWriter("test.ppm")) {
             write.println("P3");
