@@ -3,9 +3,15 @@ import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
 public class Main {
+
+    public static Color rayColor(Ray ray) {
+        double t = (ray.direction.y+1)/2;
+        return new Color(1-t,1-t,1);
+    }
+
     public static void main (String[] args){
 
-        Camera camera = new Camera(new Vector3(0,0,0), new Vector3(0,0,-1));
+        Camera camera = new Camera(new Vector3(0,0,0), new Vector3(0,0,-1), new Vector3(1,0,0), new Vector3(0,1,0));
 
         final int IMG_WIDTH = Camera.width;
         final int IMG_HEIGHT = Camera.height;
@@ -17,10 +23,9 @@ public class Main {
             write.println(MAX_VAL);
             for (int i = 0; i < IMG_HEIGHT; i++) {
                 for (int j = 0; j < IMG_WIDTH; j++) {
-                    int r = (int) ((j / (IMG_WIDTH-1.0)) * MAX_VAL);
-                    int g = (int) ((i / (IMG_HEIGHT-1.0)) * MAX_VAL);
-                    int b = (int)(((-1*(i-IMG_HEIGHT-1))/(IMG_HEIGHT-1.0))*MAX_VAL);
-                    write.println(r + " " + g + " " + b);
+                    Ray ray = camera.getRay(j,i);
+                    Color pixelColor = rayColor(ray);
+                    write.println((int)(pixelColor.color.x*255) + " " + (int)(pixelColor.color.y*255) + " " + (int)(pixelColor.color.z*255));
                 }
             }
         } catch (FileNotFoundException e) {
