@@ -17,12 +17,20 @@ public class Main {
                 for (int j = 0; j < IMG_WIDTH; j++) {
                     int r = (int) ((j / (IMG_WIDTH-1.0)) * MAX_VAL);
                     int g = (int) ((i / (IMG_HEIGHT-1.0)) * MAX_VAL);
-                    int b = 0;
+                    int b = (int)(((-1*(i-IMG_HEIGHT-1))/(IMG_HEIGHT-1.0))*MAX_VAL);
                     write.println(r + " " + g + " " + b);
                 }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Could not open file: " + e.getMessage());
         }
+
+        Vector3 A = new Vector3(0,0,1);
+        Vector3 B = new Vector3(0,1,0);
+        Vector3 C = new Vector3(1,0,0);
+
+        Vector3 D = C.cross(B);
+        System.out.println(D);
+
     }
 }
