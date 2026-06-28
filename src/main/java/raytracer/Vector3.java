@@ -38,7 +38,7 @@ public class Vector3 {
 
     public Vector3 normalize() {
         double mag = this.magnitude();
-        if (mag==0) {
+        if (mag<1e-10) {
             return new Vector3(0,0,0);
         }
         return new Vector3(x/mag, y/mag, z/mag);
