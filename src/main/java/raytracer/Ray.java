@@ -8,4 +8,9 @@ public class Ray {
         this.origin = origin;
         this.direction = direction;
     }
+
+    //returns the point to which a ray points
+    public Vector3 pointAt(double t) {
+        return origin.add(direction.scalarMult(t));
+    }
 }
