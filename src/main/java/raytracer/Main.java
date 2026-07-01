@@ -5,12 +5,17 @@ import java.io.FileNotFoundException;
 public class Main {
 
     public static Color rayColor(Ray ray) {
-        double t = (ray.direction.y+1)/2;
-        return new Color(1-t,1-t,1);
+        Sphere s1 = new Sphere(3, new Vector3(0,0, -7), new Color(1, 0, 0));
+        if(s1.checkHit(ray)>=0) {
+            return s1.sphereColor;
+        }
+        else {
+            double t = (ray.direction.y + 1) / 2;
+            return new Color(1 - t, 1 - t, 1);
+        }
     }
 
     public static void main (String[] args){
-
         Camera camera = new Camera(new Vector3(0,0,0), new Vector3(0,0,-1), new Vector3(1,0,0), new Vector3(0,1,0));
 
         final int IMG_WIDTH = Camera.width;
@@ -31,13 +36,5 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.out.println("Could not open file: " + e.getMessage());
         }
-
-        Vector3 A = new Vector3(0,0,1);
-        Vector3 B = new Vector3(0,1,0);
-        Vector3 C = new Vector3(1,0,0);
-
-        Vector3 D = C.cross(B);
-        System.out.println(D);
-
     }
 }
